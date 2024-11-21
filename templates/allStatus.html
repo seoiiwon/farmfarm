@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/statusGrid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/init.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/statusAll.css') }}">
+
+    <title>Document</title>
+</head>
+<body>
+    {% extends "nav.html" %}
+    {% block content %}
+    <div id="allStatusContainer">
+        <div id="statusContainer">
+            <div id="statusGraph"></div>
+            <div id="statusTable"></div>
+        </div>
+        <div id="statusGridContainer">
+            <div id="statusCategory">
+                <div id="status1">온도</div>
+                <div id="status2">습도</div>
+                <div id="status3">토양 습도</div>
+                <div id="status4">조도</div>
+                <div id="status5">co2 농도</div>
+                <div id="status6">수온</div>
+            </div>
+            <div id="statusValue">
+                <div id="status1Value">ㅇ</div>
+                <div id="status2Value">ㅇ</div>
+                <div id="status3Value">ㅇ</div>
+                <div id="status4Value">ㅇ</div>
+                <div id="status5Value">ㅇ</div>
+                <div id="status6Value">ㅇ</div>
+            </div>
+            <div id="settingCategory">
+                <div id="setting1">희망 온도</div>
+                <div id="setting2">희망 습도</div>
+                <div id="setting3">희망 토양 습도</div>
+                <div id="setting4">희망 조도</div>
+                <div id="setting5">희망 co2 농도</div>
+                <div id="setting6">희망 수온</div>
+            </div>
+            <div id="settingValue">
+                <input id="setting1Value" type="text" placeholder="18%">
+                <input id="setting2Value" type="text" placeholder="18%">
+                <input id="setting3Value" type="text" placeholder="18%">
+                <input id="setting4Value" type="text" placeholder="18%">
+                <input id="setting5Value" type="text" placeholder="18%">
+                <input id="setting6Value" type="text" placeholder="18%">
+            </div>
+        </div>
+    </div>
+    <script>
+        let statusContainer = document.getElementById("statusContainer");
+
+        statusContainer.addEventListener("click", () => {
+            statusContainer.classList.toggle("slided");
+        });
+    </script>
+    {% endblock %}
+
+</body>
+</html>

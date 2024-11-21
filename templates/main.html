@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/init.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/modal.css') }}">
+    <script src="{{ url_for('static', path='js/modal.js') }}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    {% extends "nav.html" %}
+    {% block content %}
+    <div>
+        <div id="selectContainer">
+            <select name="crop_id" id="cropSelect">
+            {% for crop in crops %}
+                {% set current_env_status = envStatus | selectattr('crop_id', 'equalto', crop.id) | first %}
+                <option value="{{ crop.id }}">{{ crop.name}} - {{ crop.nickname }}</option>
+            {% endfor %}
+            </select>
+        </div>
+
+        <div id="statusContainer">
+            <div class="statusLayer">
+                <div class="statusBox">
+                    <div class="status" id="status1"></div>
+                    <div id="status1Value" set-data="{{ crop.set_temperature}}" cur-data="{{ currentEnv.temperature}}">온도</div>
+                </div>
+                <div class="statusBox">
+                    <div class="status" id="status2"></div>
+                    <div id="status2Value" set-data="{{ crop.set_humidity}}" cur-data="{{ currentEnv.humidity}}">습도</div>
+                </div>
+                <div class="statusBox">
+                    <div class="status" id="status3"></div>
+                    <div id="status3Value" set-data="{{ crop.set_solidHumidity}}" cur-data="{{ currentEnv.solidHumidity}}">토양 습도</div>
+                </div>
+            </div>
+            <div class="statusLayer">
+                <div class="statusBox">
+                    <div class="status" id="status4"></div>
+                    <div id="status4Value" set-data="{{ crop.set_illuminance}}" cur-data="{{ currentEnv.illuminance}}">조도</div>
+                </div>
+                <div class="statusBox">
+                    <div class="status" id="status5"></div>
+                    <div id="status5Value" set-data="{{ crop.set_co2Concentration}}" cur-data="{{ currentEnv.co2Concentration}}">co2 농도</div>
+                </div>
+                <div class="statusBox">
+                    <div class="status" id="status6"></div>
+                    <div id="status6Value" set-data="{{ crop.set_waterTemperature}}" cur-data="{{ currentEnv.waterTemperature}}">수온</div>
+                </div>
+            </div>
+        </div>
+        <div class="modalContainer" id="modal">
+            <div>
+                <div id="modalTitle">Title</div>
+                <div id="modalStatus">       
+                    <img src="data:image/png;base64,{{ temperature_graph }}" alt="Temperature Trend Graph">
+                </div>
+                <div id="modalControl">
+                    <div id="currentStatus">
+                        <div class="statusTitle">현재 상태</div>
+                        <div id="currentValue"></div>
+                    </div>
+                    <div id="desiredStatus">
+                        <div class="statusTitle">희망 상태</div>
+                        <div id="desiredValue"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

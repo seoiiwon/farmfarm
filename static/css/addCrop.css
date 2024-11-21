@@ -1,0 +1,92 @@
+#formContainer {
+    margin: 5vh 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 5vh;
+}
+
+#cropTypeContainer {
+    display: flex;
+    justify-content: center;
+    gap: 5vw;
+    margin-bottom: 3vh;
+    font-size: 1.6em;
+}
+
+#cropTypeContainer input {
+    border-bottom: 1px dotted red;
+    height: 2em;
+    font-size: 1em;
+    margin: 0 1vw;
+    text-align: center;
+}
+
+#detailInfoContainer {
+    position: relative;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 40vh; 
+    width: 60vw; 
+    margin: 0 auto; 
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+#inputBox {
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: auto;  
+    gap: 1em;  
+    width: 100%; 
+    height: auto;
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box; 
+}
+
+#inputBox > div {
+    text-align: center;  
+    font-size: 1.2em;
+    line-height: 5em;  
+}
+
+#inputBox input {
+    font-size: 1em;
+    width: 100%; 
+    text-align: center; 
+    padding: 0.5em; 
+    box-sizing: border-box;
+}
+
+.notice {
+    margin: 4vh 0;
+    display: flex;
+    justify-content: center;
+}
+
+#btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+}
+
+#addBtn {
+    width: 10vw;
+    font-size: 1.2em;
+    background-color: #D2DFA6;
+    color: #121212;
+    height: 5vh;
+    border-radius: 20px;
+}
+
+#addBtn:hover {
+    cursor: pointer;
+}

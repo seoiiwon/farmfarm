@@ -1,0 +1,41 @@
+#allStatusContainer {
+    margin: 16vh 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+}
+
+#statusContainer {
+    display: flex; /* 수평으로 자식들 정렬 */
+    position: relative;
+    width: 200%; /* 부모 요소의 너비 설정 */
+    height: 30vw; /* 부모 요소의 높이 설정 */
+    overflow: hidden; /* 넘치는 부분 숨김 */
+    border: 1px solid black;
+}
+
+#statusGraph, #statusTable {
+    position: absolute; /* 절대 위치로 설정 */
+    width: 100%; /* 각 요소가 100% 차지 */
+    height: 100%; /* 부모 요소에 맞게 높이 설정 */
+    transition: transform 0.3s ease; /* 슬라이드 효과를 위해 추가 */
+}
+
+#statusGraph {
+    background-color: red;
+    transform: translateX(0); /* 처음에는 제자리 */
+}
+
+#statusTable {
+    background-color: blue;
+    transform: translateX(100%); /* 처음에는 statusTable이 오른쪽으로 숨겨짐 */
+}
+
+#statusContainer.slided #statusGraph {
+    transform: translateX(-100%); /* 슬라이드 효과: statusGraph를 왼쪽으로 이동 */
+}
+
+#statusContainer.slided #statusTable {
+    transform: translateX(0); /* 슬라이드 효과: statusTable을 화면에 보여줌 */
+}

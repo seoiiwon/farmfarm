@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/nav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/init.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/addCrop.css') }}">
+    <script src="{{ url_for('static', path='js/controller.js') }}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    {% extends "nav.html" %}
+    {% block content %}
+    <div id="formContainer">
+        <form id="cropForm">
+            <div class="title">작물을 등록해보세요!</div>
+            <div id="cropTypeContainer">
+                <div>
+                    <span>품종 : </span>
+                    <input type="text" id="cropName" name="name" placeholder="품종을 입력해주세요!">
+                </div>
+                <div>
+                    <span>제 아이의 이름은 </span>
+                    <input type="text" id="cropNickname" name="nickname" placeholder="귀여운 별명을 지어주새요!">
+                    <span>입니다!</span>
+                </div>
+            </div>
+            <div id="detailInfoContainer">
+                <div id="inputBox">
+                    <div id="setting1">
+                        <div>온도</div>
+                        <div>습도</div>
+                        <div>조도</div>
+                    </div>
+                    <div id="value1">
+                        <input type="text" id="setTemperature" name="set_temperature" placeholder="희망 온도를 입력하세요!">
+                        <input type="text" id="setHumidity" name="set_humidity" placeholder="희망 습도를 입력하세요!">
+                        <input type="text" id="setIlluminance" name="set_illuminance" placeholder="희망 조도를 입력하세요!">
+                    </div>
+                    <div id="setting2">
+                        <div>토양 습도</div>
+                        <div>co2 농도</div>
+                        <div>수온</div>
+                    </div>
+                    <div id="value2">
+                        <input type="text" id="setSolidHumidity" name="set_solidHumidity" placeholder="희망 토양 습도를 입력하세요!">
+                        <input type="text" id="setCo2Concentration" name="set_co2Concentration" placeholder="희망 co2 농도를 입력하세요!">
+                        <input type="text" id="setWaterTemperature" name="set_waterTemperature" placeholder="희망 수온을 입력하세요!">
+                    </div>
+                </div>
+            </div>
+            <div class="notice">단위는 생략해서 입력 바랍니다. 등록 후 수정 가능합니다.</div>
+            <div id="btnContainer">
+                <button type="submit" id="addBtn">등록하기</button>
+            </div>
+        </form>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

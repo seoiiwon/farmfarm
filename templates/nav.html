@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/nav.css') }}">
+    <script src="{{ url_for('static', path='js/nav.js') }}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div id="title">FarmFarm</div>
+        <div id="contentContainer">
+            <div class="navContent" id="nav1">현재상태</div>
+            <div class="navContent" id="nav2">전체상태제어</div>
+            <div class="navContent" id="nav3">작물등록</div>
+        </div>
+    </nav>
+    <main id="content">
+        {% block content %} {% endblock %}
+    </main>
+</body>
+</html>
