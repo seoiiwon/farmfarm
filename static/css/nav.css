@@ -1,0 +1,46 @@
+nav {
+    background-color: #D2DFA6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5vw;
+    height: 8vh;
+}
+
+#title {
+    font-family: 'GmarketSansTTFBold';
+    color: #567D46;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+    font-size: 1.5em;
+}
+#title:hover {
+    cursor: pointer;
+}
+
+#contentContainer {
+    margin-right: 12vw;
+}
+
+.navContent {
+    font-family: 'GmarketSansTTFMedium';
+    color: #A4A9A6;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+.navContent:hover {
+    cursor: pointer;
+}
+
+nav > div:last-child {
+    display: flex;
+    gap: 8vw;
+}
+
+#nav1 {
+    font-family: 'GmarketSansTTFBold';
+    color: #567D46;
+    font-weight: bold;
+    border-bottom: 3px solid black;
+}

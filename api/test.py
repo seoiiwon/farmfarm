@@ -24,13 +24,8 @@ class EnvironmentStatus(BaseModel):
     co2Concentration: float
     recorded_at: datetime
 
-# 템플릿 불러오는 api
-@router.get("/", status_code=status.HTTP_200_OK, response_class=HTMLResponse)
-async def loadTemplatesTest(request: Request):
-    try:
-        return templates.TemplateResponse(name="test.html", request=request)
-    except Exception:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
 # 아두이노에서 상태 전송하면 데이터 입력하는 api
 @router.post("/record/{crop_name}", status_code=status.HTTP_201_CREATED)

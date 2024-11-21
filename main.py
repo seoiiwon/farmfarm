@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.cors import CORSMiddleware
-from api import test
+from api import test, view, cropData, statusData
 
 app = FastAPI()
 
@@ -27,6 +27,9 @@ app.add_middleware(
 )
 
 app.include_router(test.router)
+app.include_router(view.router)
+app.include_router(cropData.router)
+app.include_router(statusData.router)
 
 HOST = "0.0.0.0"
 # PORT = 80

@@ -1,0 +1,39 @@
+#statusGridContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4열 그리드 */
+    grid-gap: 10px; /* 그리드 항목 간 간격 */
+    font-size: 1.2em;
+}
+
+/* status1부터 status6까지 1열에 배치 */
+#status1, #status2, #status3, #status4, #status5, #status6 {
+    grid-column: 1; /* 첫 번째 열에 배치 */
+    line-height: 8vh;
+    width: fit-content;
+}
+
+/* status1Value부터 status6Value까지 2열에 배치 */
+#status1Value, #status2Value, #status3Value, #status4Value, #status5Value, #status6Value {
+    grid-column: 2; /* 두 번째 열에 배치 */
+    line-height: 8vh;
+    width: 100%; /* 너비를 100%로 설정하여 그리드에 맞춤 */
+}
+
+/* setting1부터 setting6까지 3열에 배치 */
+#setting1, #setting2, #setting3, #setting4, #setting5, #setting6 {
+    grid-column: 3; /* 세 번째 열에 배치 */
+    line-height: 8vh;
+    width: fit-content;
+}
+
+/* setting1Value부터 setting6Value까지 4열에 배치 */
+#setting1Value, #setting2Value, #setting3Value, #setting4Value, #setting5Value, #setting6Value {
+    grid-column: 4; /* 네 번째 열에 배치 */
+    width: 100%; /* 너비를 100%로 설정하여 그리드에 맞춤 */
+}
+
+/* input 요소 스타일 추가 */
+input[type="text"] {
+    height: 40px;
+    box-sizing: border-box;
+}
