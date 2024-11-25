@@ -14,16 +14,19 @@ router = APIRouter(tags=["아두이노를 위한 API"])
 @router.get("/arduino/settingEnv/{crop_id}")
 async def settingEnv(crop_id: int, db: Session=Depends(get_db)):
     cropEnv = db.query(CropModel).filter(CropModel.id == crop_id).first()
-    return {
-        "id" : cropEnv.id,
-        "set_temperature" : cropEnv.set_temperature,
-        "set_humidity" : cropEnv.set_humidity,
-        "set_solidHumidity" : cropEnv.set_solidHumidity,
-        "set_illuminance" : cropEnv.set_illuminance,
-        "set_co2Concentration" : cropEnv.set_co2Concentration,
-        "set_waterTemperature" : cropEnv.set_waterTemperature,
-        "created_at" : cropEnv.created_at
-    }
+    if cropEnv is None:
+        return JSONResponse(status_code=404, content={"error": "Crop not found"})
+    return JSONResponse(content={
+        "id": cropEnv.id,
+        "set_temperature": cropEnv.set_temperature,
+        "set_humidity": cropEnv.set_humidity,
+        "set_solidHumidity": cropEnv.set_solidHumidity,
+        "set_illuminance": cropEnv.set_illuminance,
+        "set_co2Concentration": cropEnv.set_co2Concentration,
+        "set_waterTemperature": cropEnv.set_waterTemperature,
+        "created_at": cropEnv.created_at
+    })
+
 
 class UpdateSubData(BaseModel):
     co2Concentration: float
