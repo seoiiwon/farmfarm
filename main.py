@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.cors import CORSMiddleware
-from api import test, view, cropData, statusData
+from api import test, view, cropData, statusData, forArduino
 
 app = FastAPI()
 
@@ -30,6 +30,7 @@ app.include_router(test.router)
 app.include_router(view.router)
 app.include_router(cropData.router)
 app.include_router(statusData.router)
+app.include_router(forArduino.router)
 
 HOST = "0.0.0.0"
 # PORT = 80
