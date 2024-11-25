@@ -25,3 +25,24 @@ async def settingEnv(crop_id: int, db: Session=Depends(get_db)):
         "created_at" : cropEnv.created_at
     }
 
+class UpdateSubData(BaseModel):
+    co2Concentration: float
+    waterTemperature: float
+
+
+@router.put("/arduino/sub/{crop_id}")
+async def updateSubData(updateSchema: UpdateSubData, crop_id: int, db: Session=Depends(get_db)):
+    currentEnv = db.query(EnvironmentStatusModel).filter(EnvironmentStatusModel.crop_id == crop_id).order_by(EnvironmentStatusModel.recorded_at.desc()).first()  
+
+    if currentEnv:
+        currentEnv.co2Concentration = updateSchema.co2Concentration
+        currentEnv.waterTemperature = updateSchema.waterTemperature
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    db.commit()
+    db.refresh(currentEnv)
+    return {"solidHumidity" : currentEnv.solidHumidity}    
+        
+
+
