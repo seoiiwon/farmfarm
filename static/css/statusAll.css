@@ -23,12 +23,17 @@
 }
 
 #statusGraph {
-    background-color: red;
     transform: translateX(0); /* 처음에는 제자리 */
+}
+#statusGraph img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* 클릭을 비활성화하여 스크롤 방해하지 않도록 함 */
 }
 
 #statusTable {
-    background-color: blue;
+    background-color: white;
     transform: translateX(100%); /* 처음에는 statusTable이 오른쪽으로 숨겨짐 */
 }
 

@@ -1,7 +1,6 @@
 document.getElementById('cropSelect').addEventListener('change', function() {
     var selectedCropId = this.value;
     if (selectedCropId) {
-        // 선택된 값 저장
         localStorage.setItem('selectedCropId', selectedCropId);
         window.location.href = `/${selectedCropId}`;
     }
@@ -9,20 +8,19 @@ document.getElementById('cropSelect').addEventListener('change', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     var selectElement = document.getElementById('cropSelect');
-    var selectedCropId = localStorage.getItem('selectedCropId');  // 저장된 선택값 읽기
+    var selectedCropId = localStorage.getItem('selectedCropId');
 
     if (selectedCropId) {
-        // 선택된 값에 해당하는 옵션을 찾고 포커스 맞추기
         var selectedOption = selectElement.querySelector(`option[value='${selectedCropId}']`);
         if (selectedOption) {
             selectedOption.selected = true;
-            selectedOption.focus();  // 선택된 옵션에 포커스 맞추기
+            selectedOption.focus();
         }
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
 
+document.addEventListener('DOMContentLoaded', () => {
     const statuses = document.querySelectorAll('.status');
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modalTitle');
@@ -33,30 +31,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentValue = document.getElementById('currentValue');
 
     statuses.forEach(status => {
-        status.addEventListener('click', () => {
-            const id = status.id; // status1, status2, ...
-            const statusValue = document.getElementById(`${id}Value`);
+        status.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            const graphKey = status.getAttribute('data-graph-key');
+            const statusValue = document.getElementById(`${status.id}Value`);
             const setData = statusValue.getAttribute('set-data');
             const curData = statusValue.getAttribute('cur-data');
 
-            // 모달 표시
             modal.style.display = 'flex';
-            modalTitle.textContent = `상태: ${statusValue.textContent}`;
-            modalStatus.textContent = `상태 상세`;
-
-            // 모달에 값 설정
+            modalTitle.textContent = `${statusValue.textContent} 그래프`;
             desiredValue.textContent = setData;
             currentValue.textContent = curData;
 
-            // 배경 흐리게
+            if (graphsData[graphKey]) {
+                modalStatus.innerHTML = `
+                    <img src="data:image/png;base64,${graphsData[graphKey]}" 
+                         alt="${graphKey} graph" 
+                         class="graphImage">
+                `;
+            } else {
+                modalStatus.innerHTML = `<p>그래프를 불러올 수 없습니다.</p>`;
+            }
+
             statusContainer.style.filter = 'blur(5px)';
         });
     });
 
+    statusContainer.addEventListener('click', () => {
+        modal.style.display = 'none';
+        modalStatus.innerHTML = ""; 
+        statusContainer.style.filter = 'none';
+    });
+
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-            statusContainer.style.filter = 'none';
-        }
+        e.stopPropagation(); 
     });
 });

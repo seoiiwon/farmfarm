@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='css/statusGrid.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/init.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/statusAll.css') }}">
-
+    <script src="{{ url_for('static', path='js/statusUpdate.js') }}" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,7 +14,9 @@
     {% block content %}
     <div id="allStatusContainer">
         <div id="statusContainer">
-            <div id="statusGraph"></div>
+            <div id="statusGraph">
+                <img src="data:image/png;base64,{{ graph_image }}" alt="Environmental Status Graph">
+            </div>
             <div id="statusTable"></div>
         </div>
         <div id="statusGridContainer">
@@ -27,12 +29,12 @@
                 <div id="status6">수온</div>
             </div>
             <div id="statusValue">
-                <div id="status1Value">ㅇ</div>
-                <div id="status2Value">ㅇ</div>
-                <div id="status3Value">ㅇ</div>
-                <div id="status4Value">ㅇ</div>
-                <div id="status5Value">ㅇ</div>
-                <div id="status6Value">ㅇ</div>
+                <div id="status1Value">{{ crop.set_temperature }}</div>
+                <div id="status2Value">{{ crop.set_humidity }}</div>
+                <div id="status3Value">{{ crop.set_solidHumidity }}</div>
+                <div id="status4Value">{{ crop.set_illuminance }}</div>
+                <div id="status5Value">{{ crop.set_co2Concentration }}</div>
+                <div id="status6Value">{{ crop.set_waterTemperature }}</div>
             </div>
             <div id="settingCategory">
                 <div id="setting1">희망 온도</div>
@@ -42,14 +44,15 @@
                 <div id="setting5">희망 co2 농도</div>
                 <div id="setting6">희망 수온</div>
             </div>
-            <div id="settingValue">
-                <input id="setting1Value" type="text" placeholder="18%">
-                <input id="setting2Value" type="text" placeholder="18%">
-                <input id="setting3Value" type="text" placeholder="18%">
-                <input id="setting4Value" type="text" placeholder="18%">
-                <input id="setting5Value" type="text" placeholder="18%">
-                <input id="setting6Value" type="text" placeholder="18%">
-            </div>
+            <form action="" id="settingValue">
+                <input id="setting1Value" type="text" placeholder="희망 온도를 입력하세요." value="{{ currentEnv.temperature }}">
+                <input id="setting2Value" type="text" placeholder="희망 습도를 입력하세요." value="{{ currentEnv.humidity }}">
+                <input id="setting3Value" type="text" placeholder="희망 토양 습도를 입력하세요." value="{{ currentEnv.solidHumidity }}">
+                <input id="setting4Value" type="text" placeholder="희망 조도를 입력하세요." value="{{ currentEnv.illuminance }}">
+                <input id="setting5Value" type="text" placeholder="희망 co2 농도를 입력하세요." value="{{ currentEnv.co2Concentration }}">
+                <input id="setting6Value" type="text" placeholder="희망 수온을 입력하세요." value="{{ currentEnv.waterTemperature }}">
+                <button type="submit">수정하기</button>
+            </form>
         </div>
     </div>
     <script>

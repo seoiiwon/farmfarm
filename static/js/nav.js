@@ -1,38 +1,38 @@
 const navActions = {
-    nav1: "/",
-    nav2: "/status_all",
-    nav3: "/add_crop"
+    nav1: (cropId) => `/${cropId}`,
+    nav2: (cropId) => `/status_all/${cropId}`,
+    nav3: (cropId) => `/add_crop/${cropId}`,
 };
 
 const contentContainer = document.getElementById("content");
 
 document.querySelectorAll(".navContent").forEach(nav => {
-    nav.addEventListener("click", async () => {
-        const apiUrl = navActions[nav.id]; // 버튼 ID에 따라 API URL 선택
-        if (!apiUrl) return;
+    nav.addEventListener("click", () => {
+        const cropId = 1;
 
-        try {
-            // API 호출
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error("API 요청 실패");
-            }
-            
-            // HTML 콘텐츠 로드
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(await response.text(), "text/html");
-            const newContent = htmlDoc.querySelector("main#content"); // main 태그 추출
+        // 현재 선택된 메뉴 저장
+        localStorage.setItem("activeNav", nav.id);
 
-            if (newContent) {
-                contentContainer.innerHTML = newContent.innerHTML; // 콘텐츠 교체
-                // URL 변경 (브라우저 히스토리 업데이트)
-                window.history.pushState({}, "", apiUrl);
-            } else {
-                throw new Error("HTML 구조가 올바르지 않습니다.");
-            }
-        } catch (error) {
-            console.error("API 호출 중 오류:", error);
-            contentContainer.innerHTML = "콘텐츠 로드 에러";
+        // URL 변경 및 페이지 새로고침
+        const apiUrl = navActions[nav.id] ? (typeof navActions[nav.id] === 'function' ? navActions[nav.id](cropId) : navActions[nav.id]) : null;
+        if (apiUrl) {
+            window.location.href = apiUrl;
+        }
+    });
+});
+
+// DOMContentLoaded 이벤트에서 상태 복원
+document.addEventListener("DOMContentLoaded", () => {
+    const activeNav = localStorage.getItem("activeNav");
+    document.querySelectorAll(".navContent").forEach(nav => {
+        if (nav.id === activeNav) {
+            nav.style.color = "#567D46";
+            nav.style.fontWeight = "bold";
+            nav.style.borderBottom = "3px solid black";
+        } else {
+            nav.style.color = "#A4A9A6";
+            nav.style.fontWeight = "normal";
+            nav.style.borderBottom = "none";
         }
     });
 });

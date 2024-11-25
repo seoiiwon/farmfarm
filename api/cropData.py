@@ -71,14 +71,12 @@ async def updateCropStatus(UpdateCropSchema: UpdateCropSchema, crop_id: int, db:
     crop = db.query(CropModel).filter(CropModel.id == crop_id).first()
 
     if crop:
-        for key, value in UpdateCropSchema.model_dump(exclude_unset=True).items():
-            setattr(crop, key, value)
-        # crop.set_temperature=UpdateCropSchema.set_temperature
-        # crop.set_humidity=UpdateCropSchema.set_humidity
-        # crop.set_solidHumidity=UpdateCropSchema.set_solidHumidity
-        # crop.set_illuminance=UpdateCropSchema.set_illuminance
-        # crop.set_co2Concentration=UpdateCropSchema.set_co2Concentration
-        # crop.set_waterTemperature=UpdateCropSchema.set_waterTemperature
+        crop.set_temperature=UpdateCropSchema.set_temperature
+        crop.set_humidity=UpdateCropSchema.set_humidity
+        crop.set_solidHumidity=UpdateCropSchema.set_solidHumidity
+        crop.set_illuminance=UpdateCropSchema.set_illuminance
+        crop.set_co2Concentration=UpdateCropSchema.set_co2Concentration
+        crop.set_waterTemperature=UpdateCropSchema.set_waterTemperature
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
