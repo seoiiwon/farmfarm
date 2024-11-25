@@ -88,7 +88,7 @@ def generateEnvironmentalTotalGraphs(env):
 async def loadMain(request: Request, crop_id: int, db: Session = Depends(get_db)):
     crops = db.query(CropModel).all()
     crop = db.query(CropModel).filter(CropModel.id == crop_id).first()
-    currentEnv = db.query(EnvironmentStatusModel).filter(EnvironmentStatusModel.crop_id == crop_id).first()
+    currentEnv = db.query(EnvironmentStatusModel).filter(EnvironmentStatusModel.crop_id == crop_id).order_by(EnvironmentStatusModel.recorded_at.desc()).first()    
     env = db.query(EnvironmentStatusModel).filter(EnvironmentStatusModel.crop_id == crop_id).order_by(EnvironmentStatusModel.recorded_at.desc()).limit(10).all()    
 
     graph_images = generateEnvironmentalGraphs(env)
