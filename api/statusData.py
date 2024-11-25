@@ -14,7 +14,7 @@ router = APIRouter(tags=["작물 상태 API"])
 class EnvStatusSchema(BaseModel):
     crop_id: int
     temperature: float
-    humidity: int
+    humidity: float
     solidHumidity: float
     illuminance: float
     co2Concentration: float
