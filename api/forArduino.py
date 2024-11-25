@@ -11,7 +11,7 @@ import io
 
 router = APIRouter(tags=["아두이노를 위한 API"])
 
-@router.get("/arduino/settingEnv{crop_id}")
+@router.get("/arduino/settingEnv/{crop_id}")
 async def settingEnv(crop_id: int, db: Session=Depends(get_db)):
     cropEnv = db.query(CropModel).filter(CropModel.id == crop_id).first()
     return {
