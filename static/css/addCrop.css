@@ -14,7 +14,7 @@
 #cropTypeContainer {
     display: flex;
     justify-content: center;
-    gap: 5vw;
+    gap: 1vw;
     margin-bottom: 3vh;
     font-size: 1.6em;
 }

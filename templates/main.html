@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='css/init.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/modal.css') }}">
     <script src="{{ url_for('static', path='js/modal.js') }}" defer></script>
+    <script>const graphsData = JSON.parse(`{{ graphs | safe }}`);</script>
     <title>Document</title>
 </head>
 <body>
@@ -25,29 +26,41 @@
         <div id="statusContainer">
             <div class="statusLayer">
                 <div class="statusBox">
-                    <div class="status" id="status1"></div>
-                    <div id="status1Value" set-data="{{ crop.set_temperature}}" cur-data="{{ currentEnv.temperature}}">온도</div>
+                    <div class="status" id="status1" data-graph-key="temperature">
+                        <img src="data:image/png;base64,{{ graphsForDisplay['temperature'] }}" alt="Temperature Graph" class="graphImage">
+                    </div>
+                    <div id="status1Value" set-data="{{ crop.set_temperature }}" cur-data="{{ currentEnv.temperature }}">온도</div>
                 </div>
                 <div class="statusBox">
-                    <div class="status" id="status2"></div>
-                    <div id="status2Value" set-data="{{ crop.set_humidity}}" cur-data="{{ currentEnv.humidity}}">습도</div>
+                    <div class="status" id="status2" data-graph-key="humidity">
+                        <img src="data:image/png;base64,{{ graphsForDisplay['humidity'] }}" alt="Temperature Graph" class="graphImage">
+                    </div>
+                    <div id="status2Value" set-data="{{ crop.set_humidity }}" cur-data="{{ currentEnv.humidity }}">습도</div>
                 </div>
                 <div class="statusBox">
-                    <div class="status" id="status3"></div>
-                    <div id="status3Value" set-data="{{ crop.set_solidHumidity}}" cur-data="{{ currentEnv.solidHumidity}}">토양 습도</div>
+                    <div class="status" id="status3" data-graph-key="solidHumidity">
+                        <img src="data:image/png;base64,{{ graphsForDisplay['solidHumidity'] }}" alt="Temperature Graph" class="graphImage">
+                    </div>
+                    <div id="status3Value" set-data="{{ crop.set_solidHumidity }}" cur-data="{{ currentEnv.solidHumidity }}">토양 습도</div>
                 </div>
             </div>
             <div class="statusLayer">
                 <div class="statusBox">
-                    <div class="status" id="status4"></div>
+                    <div class="status" id="status4" data-graph-key="illuminance">
+                        <img src="data:image/png;base64,{{ graphsForDisplay['illuminance'] }}" alt="Temperature Graph" class="graphImage">
+                    </div>
                     <div id="status4Value" set-data="{{ crop.set_illuminance}}" cur-data="{{ currentEnv.illuminance}}">조도</div>
                 </div>
                 <div class="statusBox">
-                    <div class="status" id="status5"></div>
+                    <div class="status" id="status5" data-graph-key="co2Concentration">
+                        <img src="data:image/png;base64,{{ graphsForDisplay['co2Concentration'] }}" alt="Temperature Graph" class="graphImage">
+                    </div>
                     <div id="status5Value" set-data="{{ crop.set_co2Concentration}}" cur-data="{{ currentEnv.co2Concentration}}">co2 농도</div>
                 </div>
                 <div class="statusBox">
-                    <div class="status" id="status6"></div>
+                    <div class="status" id="status6" data-graph-key="waterTemperature">
+                        <img src="data:image/png;base64,{{ graphsForDisplay['waterTemperature'] }}" alt="Temperature Graph" class="graphImage">
+                    </div>
                     <div id="status6Value" set-data="{{ crop.set_waterTemperature}}" cur-data="{{ currentEnv.waterTemperature}}">수온</div>
                 </div>
             </div>
@@ -55,9 +68,7 @@
         <div class="modalContainer" id="modal">
             <div>
                 <div id="modalTitle">Title</div>
-                <div id="modalStatus">       
-                    <img src="data:image/png;base64,{{ temperature_graph }}" alt="Temperature Trend Graph">
-                </div>
+                <div id="modalStatus"></div>
                 <div id="modalControl">
                     <div id="currentStatus">
                         <div class="statusTitle">현재 상태</div>
