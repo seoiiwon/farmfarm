@@ -24,3 +24,4 @@ async def settingEnv(crop_id: int, db: Session=Depends(get_db)):
         "set_waterTemperature" : cropEnv.set_waterTemperature,
         "created_at" : cropEnv.created_at
     }
+
