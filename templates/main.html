@@ -9,6 +9,11 @@
     <script src="{{ url_for('static', path='js/modal.js') }}" defer></script>
     <script>const graphsData = JSON.parse(`{{ graphs | safe }}`);</script>
     <title>Document</title>
+    <script>
+        setInterval(() => {
+            location.reload();
+        }, 1000);
+    </script>
 </head>
 <body>
     {% extends "nav.html" %}
