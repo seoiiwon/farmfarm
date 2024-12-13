@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', path='css/statusAll.css') }}">
     <script src="{{ url_for('static', path='js/statusUpdate.js') }}" defer></script>
     <title>Document</title>
+    <script>
+        setInterval(() => {
+            location.reload();
+        }, 1000);
+    </script>
 </head>
 <body>
     {% extends "nav.html" %}
